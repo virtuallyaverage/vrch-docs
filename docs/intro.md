@@ -16,7 +16,7 @@ This project is currently maintained by a single developer in spare time between
 ## Getting Started
 Setting up haptics on an avatar and getting a device built from scratch can be daunting. So there are a few tools developed to help simplify most steps down to a simple button click.
 
- - [Haptic Manager](./)
+ - [Haptic Manager](./manager/haptic-manager.md)
  - [VRC Avatar Integration](./VRChat/avatar-integration.md#basic-integration): Give the Haptics Manager access to in-game data.
 
 The VRC Haptics is a big project spanning a couple applications: 
