@@ -1,12 +1,32 @@
-name: Deploy Docusaurus to GitHub Pages
-on: [push]
+name: Deploy-GHA
 
+on:
+  push:
+    branches: ["gh-pages"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: docuactions/github-pages@main
-        env:
-          DOCUACTIONS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCUACTIONS_DEPLOYMENT: ${{ secrets.DOCUACTIONS_DEPLOYMENT }}
+
+      - name: Setup Node.js and Yarn
+        uses: actions/setup-node@v6
+        with:
+            node-version: "24"
+            cache: 'yarn'
+
+      - name: Install dependencies and build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./build
